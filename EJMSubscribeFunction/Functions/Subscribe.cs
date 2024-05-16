@@ -51,6 +51,7 @@ namespace EJMSubscribeFunction.Functions
                         }                   
                     }
                 }
+
                 return new BadRequestObjectResult(new { Status = 400, Message = "Malformed request syntax, invalid request message framing, or deceptive request routing" });
             }
             catch (Exception ex)

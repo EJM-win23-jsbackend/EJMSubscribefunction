@@ -41,7 +41,7 @@ namespace EJMSubscribeFunction.Services
             {
                 if (entity != null)
                 {
-                    var existingEntity = await _context.Subscribers.FirstOrDefaultAsync(x => x.Email == entity.Email);
+                    var existingEntity = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == entity.Id);
 
                         if(existingEntity != null)
                         {
@@ -66,8 +66,9 @@ namespace EJMSubscribeFunction.Services
             {
                 if (entity != null)
                 {
-                        _context.Entry(entity).CurrentValues.SetValues(entity);
-                        await _context.SaveChangesAsync();
+                        existingEntity.Email = entity.Email;
+                        _context.Entry(existingEntity).State = EntityState.Modified;
+                        _context.SaveChanges();
                         return new OkResult();
                 }
 
@@ -100,13 +101,13 @@ namespace EJMSubscribeFunction.Services
             }
         }
 
-        public async Task<IActionResult> GetASubscriberAsync(SubscriberEntity entity)
+        public async Task<IActionResult> GetASubscriberAsync(String entity)
         {
             try
             {
                 if (entity != null)
                 {
-                    var entityToFind = await _context.Subscribers.FirstOrDefaultAsync(x => x.Email == entity.Email);
+                    var entityToFind = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == entity);
                     
                     if(entityToFind != null)
                     {

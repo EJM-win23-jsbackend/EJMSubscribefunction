@@ -28,7 +28,7 @@ namespace EJMSubscribeFunction.Functions
 
                 if (!string.IsNullOrEmpty(body))
                 {
-                     var subscribeEntity = JsonConvert.DeserializeObject<SubscriberEntity>(body);
+                     var subscribeEntity = JsonConvert.DeserializeObject<string>(body);
 
                      if (subscribeEntity != null)
                      {
