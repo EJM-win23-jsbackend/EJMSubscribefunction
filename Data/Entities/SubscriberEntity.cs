@@ -9,5 +9,7 @@ namespace Data.Entities
 
         [Required]
         public string Email { get; set; } = null!;
+
+        public string? UserId { get; set; }
     }
 }

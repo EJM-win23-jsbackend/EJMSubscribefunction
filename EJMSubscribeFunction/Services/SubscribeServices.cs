@@ -43,12 +43,51 @@ namespace EJMSubscribeFunction.Services
                 {
                     var existingEntity = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == entity.Id);
 
-                        if(existingEntity != null)
-                        {
-                            return new OkObjectResult(existingEntity);
-                        }
+                    if (existingEntity != null && existingEntity.Id != null)
+                    {
+                        return new OkObjectResult(existingEntity);
+                    }
 
-                        return new NotFoundResult();
+                    var existingEmail = await _context.Subscribers.FirstOrDefaultAsync(y => y.Email == entity.Email);
+
+                    if (existingEmail != null && existingEmail.Email != null)
+                    {
+                        return new OkObjectResult(existingEmail);
+                    }
+
+                    var existingUser = await _context.Subscribers.FirstOrDefaultAsync(x => x.UserId == entity.UserId);
+
+                    if(existingUser != null && existingUser.UserId != null)
+                    {
+                        return new OkObjectResult(existingUser);
+                    }
+
+                    return new NotFoundResult();
+                }
+
+                return new BadRequestResult();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("CheckExsitAndUpdateAsync::" + ex.Message);
+                return new BadRequestResult();
+            }
+        }
+
+        public async Task<IActionResult> CheckIfUserExsitsAsync(SubscriberEntity entity)
+        {
+            try
+            {
+                if (entity != null)
+                {
+                    var existingUser = await _context.Subscribers.FirstOrDefaultAsync(x => x.UserId == entity.UserId);
+
+                    if (existingUser != null)
+                    {
+                        return new OkObjectResult(existingUser);
+                    }
+
+                    return new NotFoundResult();
                 }
 
                 return new BadRequestResult();
