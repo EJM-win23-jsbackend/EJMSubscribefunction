@@ -52,7 +52,7 @@ namespace EJMSubscribeFunction.Services
 
                     if (existingEmail != null && existingEmail.Email != null)
                     {
-                        return new OkObjectResult(existingEmail);
+                        return new ConflictResult();
                     }
 
                     var existingUser = await _context.Subscribers.FirstOrDefaultAsync(x => x.UserId == entity.UserId);
@@ -140,13 +140,13 @@ namespace EJMSubscribeFunction.Services
             }
         }
 
-        public async Task<IActionResult> GetASubscriberAsync(String entity)
+        public async Task<IActionResult> GetASubscriberAsync(string Userid)
         {
             try
             {
-                if (entity != null)
+                if (Userid != null)
                 {
-                    var entityToFind = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == entity);
+                    var entityToFind = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == Userid);
                     
                     if(entityToFind != null)
                     {

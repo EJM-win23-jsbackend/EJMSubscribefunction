@@ -30,9 +30,19 @@ namespace EJMSubscribeFunction.Functions
                 {
                     var subscribeEntity = JsonConvert.DeserializeObject<SubscriberEntity>(body);
 
+                    if(string.IsNullOrEmpty(subscribeEntity.Id))
+                    {
+                        subscribeEntity.Id = Guid.NewGuid().ToString();
+                    }
+
                     if(subscribeEntity != null)
                     {
                         var existingEntity = await _subscribeServices.CheckIfExsitsAsync(subscribeEntity);
+                        
+                        if(existingEntity is ConflictResult conflict)
+                        {
+                            return new ConflictObjectResult(new { Status = 409, Message = "This email is already up for subscription" });
+                        }
 
                         if(existingEntity is OkObjectResult okResult)
                         {

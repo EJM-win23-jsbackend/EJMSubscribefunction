@@ -44,7 +44,7 @@ namespace EJMSubscribeFunction.Functions
 
                                 if(result is OkResult)
                                 {
-                                    return new OkObjectResult(new { Status = 200, Message = "Subscriber was successfully deleted!" });
+                                    return new OkObjectResult(new { Status = 200, Message = "Subscription was successfully deleted!" });
                                 }
                             }
                         }
