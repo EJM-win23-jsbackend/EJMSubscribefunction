@@ -146,7 +146,7 @@ namespace EJMSubscribeFunction.Services
             {
                 if (Userid != null)
                 {
-                    var entityToFind = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == Userid);
+                    var entityToFind = await _context.Subscribers.FirstOrDefaultAsync(x => x.UserId == Userid);
                     
                     if(entityToFind != null)
                     {
