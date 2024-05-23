@@ -48,7 +48,7 @@ namespace EJMSubscribeFunction.Functions
                         {
                             var entityToUpdate = okResult.Value as SubscriberEntity;
                             var result = _subscribeServices.UpdateAsync(subscribeEntity, entityToUpdate!);
-                            return new OkObjectResult(new { Status = 200, Message = "Subscriber was successfully updated!" });
+                            return new OkObjectResult(new { Status = 200, Message = "Email was successfully updated!" });
                         }
                         else
                         {
@@ -56,7 +56,7 @@ namespace EJMSubscribeFunction.Functions
 
                             if (result is OkResult)
                             {
-                                return new OkObjectResult(new { Status = 200, Message = "Subscriber was successfully added for subscription!" });
+                                return new OkObjectResult(new { Status = 200, Message = "This email is now up for subscription!" });
                             }
                         }                   
                     }
