@@ -152,6 +152,13 @@ namespace EJMSubscribeFunction.Services
                     {
                         return new OkObjectResult(entityToFind);
                     }
+
+                    var entityToFindById = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == Userid);
+                    if (entityToFindById != null)
+                    {
+                        return new OkObjectResult(entityToFindById);
+                    }
+
                 }
 
                 return new BadRequestObjectResult( new { Status = 400, Message = "No subscriber found..." });
