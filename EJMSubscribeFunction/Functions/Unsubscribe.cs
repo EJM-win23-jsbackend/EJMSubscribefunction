@@ -50,7 +50,7 @@ namespace EJMSubscribeFunction.Functions
                         }
                         else
                         {
-                                return new NotFoundObjectResult(new { Status = 404, Message = "No subscriber found" });
+                                return new NotFoundObjectResult(new { Status = 404, Message = "No subscription found" });
                         }
                     }
                 }
